@@ -1,9 +1,10 @@
 import java.awt.Color;
+
 /**
- * Write a description of class Segment here.
+ * Clase Segment
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Miguel Bayon
+ * @version 1.0
  */
 public class Segment
 {
@@ -11,16 +12,49 @@ public class Segment
     private int posicionY;
     private int direccion;
     private Color color;
-    public static final int LONGITUD_SEGMENTO = 4;
+    public static final int LONGITUD_SEGMENTO = 10;
+
     /**
      * Constructor de la clase Segment
      */
-    public Segment(int posicionX, int posicionY, int direccion, Color color)
+    public Segment(int posX, int posY, int direccion, Color color)
     {
-        this.posicionX = posicionX;
-        this.posicionY = posicionY;
+        posicionX = posX;
+        posicionY = posY;
         this.direccion = direccion;
         this.color = color;
+    }
+
+    /**
+     * Devuelve la coordenada del eje X donde acaba el segmento
+     */
+    public int getPosicionFinalX()
+    {
+        int posicionFinalX = posicionX;
+        if(direccion == 0){
+            posicionFinalX = posicionX + LONGITUD_SEGMENTO;
+        }
+        else if(direccion == 180){
+            posicionFinalX = posicionX - LONGITUD_SEGMENTO;
+        }
+        return posicionFinalX;
+    }
+
+    /**
+     * Devuelve la coordenada del eje Y donde acaba el segmento
+     */
+    public int getPosicionFinalY()
+    {
+        int finaly = posicionY;
+        if (direccion == 90)
+        {
+            finaly = posicionY + LONGITUD_SEGMENTO;
+        }
+        else if(direccion == 270)
+        {
+            finaly = posicionY - LONGITUD_SEGMENTO;
+        }
+        return finaly;
     }
 
     /**
@@ -42,7 +76,7 @@ public class Segment
     }
 
     /**
-     * Metodo que devuelve la posicion inicial del segmento en el eje X
+     * Devuelve la coordenada del eje X donde empieza el segmento
      */
     public int getPosicionInicialX()
     {
@@ -50,42 +84,12 @@ public class Segment
     }
 
     /**
-     * Metodo que devuelve la posicion inicial del segmento en el eje Y
+     * Devuelve la coordenada del eje Y donde empieza el segmento
      */
     public int getPosicionInicialY()
     {
         return posicionY;
-    }
-
-    /**
-     * Metodo que devuelve la posicion final del segmento en el eje X
-     */
-    public int getPosicionFinalX()
-    {
-        int posicionFinalX = posicionX;
-        if(direccion == 0){
-            posicionFinalX = posicionFinalX + LONGITUD_SEGMENTO;
-        }
-        else if(direccion == 180){
-            posicionFinalX = posicionFinalX - LONGITUD_SEGMENTO;
-        }
-        return posicionFinalX;
-    }
-
-    /**
-     * Metodo que devuelve la posicion final del segmento en el eje Y
-     */
-    public int getPosicionFinalY()
-    {
-        int posicionFinalY = posicionY;
-        if(direccion == 90){
-            posicionFinalY = posicionFinalY + LONGITUD_SEGMENTO;
-        }
-        else if(direccion == 270){
-            posicionFinalY = posicionFinalY - LONGITUD_SEGMENTO;
-        }
-        return posicionFinalY;
-    }
+    }    
 
     /**
      * Devuelve la direccion que tiene el segmento
@@ -96,17 +100,12 @@ public class Segment
     }
 
     /**
-     * Metodo que devuelve true si el segmento colisiona con otro 
-     * y false en caso contrario
+     * Devuelve true si el segmento pasado como parametro colisiona con el segmento sobre el
+     * que se invoca el metodo, teniendo en cuenta que el pasado como parametro se supone que
+     * es un nuevo segmento de la serpiente; false en otro caso
      */
-    public boolean colisionaCon(Segment segmento)
+    public boolean colisiona(Segment segmento)
     {
-        boolean colisiona = false;
-        if(segmento.getPosicionInicialX() ==  getPosicionFinalX()){
-            if(segmento.getPosicionInicialY() == getPosicionFinalY()){
-                colisiona = true;
-            }
-        }
-        return colisiona;
+        return (posicionX == segmento.getPosicionFinalX() && posicionY == segmento.getPosicionFinalY());
     }
 }
