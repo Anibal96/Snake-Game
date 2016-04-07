@@ -19,7 +19,7 @@ public class SnakeGame
         lienzo = new Canvas("Snake game", ANCHO_LIENZO, ALTO_LIENZO);
 
     }
-    
+
     /**
      * Dibuja una serpiente en la pantalla
      */
@@ -28,7 +28,19 @@ public class SnakeGame
         serpiente = new Snake(ANCHO_LIENZO,ALTO_LIENZO);
         lienzo.erase();
         serpiente.dibujar(lienzo);
-        serpiente.mover(lienzo);
     }
 
+    /**
+     * Anima la serpiente de la pantalla
+     */
+    public void animateSnake(){
+        boolean mover = true;
+        while(mover){
+            lienzo.wait(200);
+            serpiente.borrar(lienzo);
+            mover = serpiente.mover(lienzo);
+            serpiente.dibujar(lienzo);
+        }
+        lienzo.drawString("GAME OVER", (ANCHO_LIENZO/2)-45, ALTO_LIENZO/2);
+    }
 }

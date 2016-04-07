@@ -12,7 +12,7 @@ public class Snake
 {
     private int anchoLienzo;
     private int altoLienzo;
-    private static final int NUMERO_SEGMENTOS_INICIALES = 13;
+    private static final int NUMERO_SEGMENTOS_INICIALES = 20;
     private static final Color color = Color.BLACK;
     private ArrayList<Segment> segmentos;   
     private static final int DIFERENCIA_DE_GRADOS_ENTRE_DIRECCIONES = 90;
@@ -42,8 +42,7 @@ public class Snake
         }
         lienzo.setForegroundColor(Color.BLACK);
         Segment ultimoSegmento = segmentos.get(segmentos.size()-1);
-        lienzo.fillCircle(ultimoSegmento.getPosicionFinalX()-(TAMANO_CABEZA/2),ultimoSegmento.getPosicionFinalY(), TAMANO_CABEZA);
-        mover(lienzo);
+        lienzo.fillCircle(ultimoSegmento.getPosicionFinalX()-(TAMANO_CABEZA/2),ultimoSegmento.getPosicionFinalY()-(TAMANO_CABEZA/2), TAMANO_CABEZA);
     }
 
     /**
@@ -54,9 +53,9 @@ public class Snake
         for (Segment segmento : segmentos) {
             segmento.borrar(lienzo);
         }             
-        lienzo.setBackgroundColor(Color.BLACK);
+        lienzo.setBackgroundColor(Color.WHITE);
         Segment ultimoSegmento = segmentos.get(segmentos.size()-1);
-        lienzo.fillCircle(ultimoSegmento.getPosicionFinalX()-(TAMANO_CABEZA/2),ultimoSegmento.getPosicionFinalY()-(TAMANO_CABEZA/2), TAMANO_CABEZA);
+        lienzo.eraseCircle(ultimoSegmento.getPosicionFinalX()-(TAMANO_CABEZA/2),ultimoSegmento.getPosicionFinalY()-(TAMANO_CABEZA/2), TAMANO_CABEZA);
     }
 
     /**
@@ -148,14 +147,9 @@ public class Snake
     /**
      * Metodo que hace moverse a la serpiente.
      */
-    public void mover(Canvas lienzo)
+    public boolean mover(Canvas lienzo)
     {
-        while(addSegment()){
-            lienzo.wait(200);
-            lienzo.erase();
-            segmentos.remove(0);
-            addSegment();
-            dibujar(lienzo);
-        }
+        segmentos.remove(0);
+        return addSegment();
     }
 }
