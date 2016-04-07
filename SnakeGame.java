@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 /**
  * Clase SnakeGame
  * 
@@ -10,6 +11,7 @@ public class SnakeGame
     private Snake serpiente;
     private static final int ANCHO_LIENZO = 500;
     private static final int ALTO_LIENZO = 500;
+    private ArrayList<Galleta> galletas;
 
     /**
      * Constructor de la clase Snake
@@ -17,7 +19,7 @@ public class SnakeGame
     public SnakeGame()
     {
         lienzo = new Canvas("Snake game", ANCHO_LIENZO, ALTO_LIENZO);
-
+        galletas = new ArrayList<Galleta>();
     }
 
     /**
@@ -42,5 +44,18 @@ public class SnakeGame
             serpiente.dibujar(lienzo);
         }
         lienzo.drawString("GAME OVER", (ANCHO_LIENZO/2)-45, ALTO_LIENZO/2);
+    }
+    
+    /**
+     * Dibuja un numero de galletas y mueve la serpiente
+     */
+    public void startGame(int numGalletas)
+    {
+        for(int cont = 0; cont < numGalletas; cont++){
+            Galleta galleta = new Galleta(ANCHO_LIENZO, ALTO_LIENZO);
+            galletas.add(galleta);
+        }
+        drawSnake();
+        animateSnake();
     }
 }

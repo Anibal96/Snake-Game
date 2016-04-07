@@ -152,4 +152,11 @@ public class Snake
         segmentos.remove(0);
         return addSegment();
     }
+    
+    /**
+     * Metodo que comprueba si la cabeza de la serpiente esta en unas cordenadas dadas.
+     */
+    public void cabezaEn(){
+        
+    }
 }
